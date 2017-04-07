@@ -92,16 +92,14 @@ public class Btree {
 			int temp[] = new int[order];
 			int j = 0;
 
-			for (int i = 0; i < this.order && splitNode.getKeyOne(i) < value; i++) {
+			for(int i = 0; i < index-1; i ++) {
 				temp[i] = splitNode.getKeyOne(i);
-				j = i;
 			}
+			temp[index-1] = value;
 
-			temp[j + 1] = value;
-
-			for (int k = j + 1; k < this.order; k++) {
-				temp[k] = splitNode.getKeyOne(k);
-			} // 여기까지 소팅
+			for(int i = index-1; i < splitNode.getKey().length && splitNode.getKeyOne(i) != 0; i++) {
+				temp[i+1] = splitNode.getKeyOne(i);
+			}
 
 			parentNode.setKey(temp[this.order / 2], 0);
 
@@ -136,7 +134,7 @@ public class Btree {
 		}
 	}
 
-	public void printAllNode(Bnode node) {
+	/*public void printAllNode(Bnode node) {
 		Bnode printNode = node;
 
 		for (int j = 0; j < this.order && printNode.getBnodeOne(j) != null; j++) {
@@ -152,7 +150,7 @@ public class Btree {
 	public void printBtree() {
 		this.printOneNode(this.rootNode);
 		printAllNode(this.rootNode);
-	}
+	}*/
 
 	public Bnode getRootNode() {
 		return rootNode;
